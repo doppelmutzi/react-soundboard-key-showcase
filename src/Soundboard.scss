@@ -1,0 +1,12 @@
+.soundboard {
+  margin: 5px;
+}
+
+.soundboard > * + * {
+  margin-top: 10px;
+}
+
+.soundboard.dark-mode {
+  background-color: black;
+  color: white;
+}
