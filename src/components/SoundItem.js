@@ -59,7 +59,6 @@ const SoundItem = ({ mp3 }) => {
   }
 
   useEffect(() => {
-    if (mp3.label === "Buli") console.log("Buli", currentSound);
     const noSoundPlaying = !currentSound;
     if (noSoundPlaying) {
       setPlayback("stop");

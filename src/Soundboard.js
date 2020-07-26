@@ -38,23 +38,28 @@ const Soundboard = () => {
     if (currentSound) lastSoundRef.current = currentSound.label;
   }, [currentSound]);
 
-  const [keyVariant, setKeyVariant] = useState("unique");
+  const [keyVariant, setKeyVariant] = useState("unstable_index");
 
   function getKey(mp3, i) {
     switch (keyVariant) {
-      case "unique":
+      case "unique_id":
+        return {
+          key: mp3.id,
+        };
+        break;
+      case "not_unique_file":
         return {
           key: mp3.file,
+        };
+        break;
+      case "unstable_index":
+        return {
+          key: i,
         };
         break;
       case "unstable":
         return {
           key: Date.now(),
-        };
-        break;
-      case "index":
-        return {
-          key: i,
         };
         break;
       default:
@@ -86,10 +91,11 @@ const Soundboard = () => {
               setKeyVariant(evt.target.value);
             }}
           >
-            <option value="unique">unique</option>
+            <option value="unstable_index">unstable (index)</option>
+            <option value="unique_id">unique (id)</option>
+            <option value="not_unique_file">not unique (file)</option>
+            <option value="unstable">unstable (Date.now())</option>
             <option value="no">no key</option>
-            <option value="index">index</option>
-            <option value="unstable">unstable</option>
           </select>
         </KeySetup>
 
